@@ -19,7 +19,7 @@ public class Main {
 			switch(opc) {
 			case 1: redeCont.mostraEthernet(so);
 				break;
-			case 2:
+			case 2: redeCont.pingDez(so);
 				break;
 			case 9: System.exit(0);
 				break;

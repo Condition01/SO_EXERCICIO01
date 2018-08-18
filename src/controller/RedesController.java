@@ -71,7 +71,65 @@ public class RedesController {
 					e.printStackTrace();
 				}		
 		}
+		
+		
 	}	
+	public void pingDez (String so) {
+		if(so.equals("Windows 10")) {
+			String path = "ping -n 10 www.google.com.br";
+			try {
+				String achado = "";
+				Process proc = Runtime.getRuntime().exec(path);
+				InputStream fluxo = proc.getInputStream();
+				InputStreamReader leitor = new InputStreamReader(fluxo);
+				BufferedReader buffer = new BufferedReader(leitor);
+				String linha = buffer.readLine();
+				while(linha != null) {
+					if(linha.contains("=")) {
+						achado = linha;
+						linha = buffer.readLine();
+					}
+					else {
+						linha = buffer.readLine();
+					}
+				}
+				String[] vetFrase = achado.split(",");				
+				achado = vetFrase[vetFrase.length-1].substring(8, 11);
+				System.out.println("Média = " + achado + "ms");
+			}catch(IOException e) {
+				String erro = e.getMessage();
+				JOptionPane.showMessageDialog(null, erro, "ERRO", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			}
+		}
+		else if(so.equals("Linux")) {
+			String path = "ping -c 10 www.google.com.br";
+			try {
+				String achado = "";
+				Process proc = Runtime.getRuntime().exec(path);
+				InputStream fluxo = proc.getInputStream();
+				InputStreamReader leitor = new InputStreamReader(fluxo);
+				BufferedReader buffer = new BufferedReader(leitor);
+				String linha = buffer.readLine();
+				while(linha != null) {
+					if(linha.contains("/")) {
+						achado = linha;
+						linha = buffer.readLine();
+					}
+					else {
+						linha = buffer.readLine();
+					}
+				}
+				String[] vetFrase = achado.split(" ");				
+				achado = vetFrase[vetFrase.length-2].substring(6, 13);
+				System.out.println("Média = " + achado + "ms");
+			}catch(IOException e) {
+				String erro = e.getMessage();
+				JOptionPane.showMessageDialog(null, erro, "ERRO", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			}
+		}
+	}
 	/*StringBuffer buffer = new StringBuffer();
 	double tempoInicial = System.nanoTime();
 	for (int i = 0; i < 32768; i++) {
