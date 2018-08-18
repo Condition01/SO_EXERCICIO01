@@ -49,17 +49,20 @@ public class RedesController {
 		else if(so.equals("Linux")) { // precisa de alguns acertos
 			String path = "ifconfig";
 				try {
+					String vetFrase[] = new String[2];
 					Process proc = Runtime.getRuntime().exec(path);
 					InputStream fluxo = proc.getInputStream();
 					InputStreamReader leitor = new InputStreamReader(fluxo);
 					BufferedReader buffer = new BufferedReader(leitor);
 					String linha = buffer.readLine();			
-					while(linha != null) {
-						int i=1;
-						if(linha.contains("inet") && !(linha.contains("inet6"))) {														
-							System.out.println("Adaptador " + i + "\n" + linha);
+					while(linha != null) {						
+						if(linha.contains("mtu")) {
+							vetFrase[0] = linha;
 							linha = buffer.readLine();
-							i++;
+						}
+						else if(linha.contains("inet") && !(linha.contains("inet6"))) {														
+							vetFrase[1] =  linha;
+							System.out.println(vetFrase[0] + "\n" + vetFrase[1]);
 						}
 						linha = buffer.readLine();
 					}
