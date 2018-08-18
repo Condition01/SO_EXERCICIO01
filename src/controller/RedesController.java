@@ -95,7 +95,7 @@ public class RedesController {
 				}
 				String[] vetFrase = achado.split(",");				
 				achado = vetFrase[vetFrase.length-1].substring(8, 11);
-				System.out.println("Média = " + achado + "ms");
+				System.out.println("Mï¿½dia = " + achado + "ms");
 			}catch(IOException e) {
 				String erro = e.getMessage();
 				JOptionPane.showMessageDialog(null, erro, "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -121,8 +121,8 @@ public class RedesController {
 					}
 				}
 				String[] vetFrase = achado.split(" ");				
-				achado = vetFrase[vetFrase.length-2].substring(6, 13);
-				System.out.println("Média = " + achado + "ms");
+				achado = vetFrase[vetFrase.length-2].substring(7, 13);
+				System.out.println("MÃ©dia = " + achado + "ms");
 			}catch(IOException e) {
 				String erro = e.getMessage();
 				JOptionPane.showMessageDialog(null, erro, "ERRO", JOptionPane.ERROR_MESSAGE);
