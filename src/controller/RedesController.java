@@ -15,9 +15,10 @@ public class RedesController {
 	public String so() {
 		return System.getProperty("os.name");
 	}
-	public void mostraEthernet(String path, String so) {
+	public void mostraEthernet(String so) {
 		
 		if(so.equals("Windows 10")) {
+			String path = "ipconfig";
 			try {
 				String vetFrase[] = new String[2];
 				Process proc = Runtime.getRuntime().exec(path);
@@ -45,10 +46,30 @@ public class RedesController {
 			}
 			
 		}
-		else if(so.equals("Linux")) {
-			
+		else if(so.equals("Linux")) { // precisa de alguns acertos
+			String path = "ip adr show";
+				try {
+					String frase;
+					Process proc = Runtime.getRuntime().exec(path);
+					InputStream fluxo = proc.getInputStream();
+					InputStreamReader leitor = new InputStreamReader(fluxo);
+					BufferedReader buffer = new BufferedReader(leitor);
+					String linha = buffer.readLine();			
+					while(linha != null) {
+						int i=1;
+						if(linha.contains("inet") && !(linha.contains("inet6"))) {							
+							frase = linha;
+							linha = buffer.readLine();
+							System.out.println("Adaptador " + i + "\n" + linha);
+						}						
+					}
+				} catch (IOException e) {
+					String erro = e.getMessage();
+					JOptionPane.showMessageDialog(null, erro, "ERRO", JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
+				}		
 		}
-	}
+	}	
 	/*StringBuffer buffer = new StringBuffer();
 	double tempoInicial = System.nanoTime();
 	for (int i = 0; i < 32768; i++) {
