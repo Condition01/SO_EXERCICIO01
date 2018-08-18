@@ -47,9 +47,8 @@ public class RedesController {
 			
 		}
 		else if(so.equals("Linux")) { // precisa de alguns acertos
-			String path = "ip adr show";
+			String path = "ifconfig";
 				try {
-					String frase;
 					Process proc = Runtime.getRuntime().exec(path);
 					InputStream fluxo = proc.getInputStream();
 					InputStreamReader leitor = new InputStreamReader(fluxo);
@@ -57,11 +56,12 @@ public class RedesController {
 					String linha = buffer.readLine();			
 					while(linha != null) {
 						int i=1;
-						if(linha.contains("inet") && !(linha.contains("inet6"))) {							
-							frase = linha;
-							linha = buffer.readLine();
+						if(linha.contains("inet") && !(linha.contains("inet6"))) {														
 							System.out.println("Adaptador " + i + "\n" + linha);
-						}						
+							linha = buffer.readLine();
+							i++;
+						}
+						linha = buffer.readLine();
 					}
 				} catch (IOException e) {
 					String erro = e.getMessage();
