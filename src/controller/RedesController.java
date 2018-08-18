@@ -57,8 +57,7 @@ public class RedesController {
 					String linha = buffer.readLine();			
 					while(linha != null) {						
 						if(linha.contains("mtu")) {
-							vetFrase[0] = linha;
-							linha = buffer.readLine();
+							vetFrase[0] = linha;							
 						}
 						else if(linha.contains("inet") && !(linha.contains("inet6"))) {														
 							vetFrase[1] =  linha;
